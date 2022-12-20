@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Solver;
+namespace Solver\Output;
 
-class ConsoleOutput
+class ConsoleOutput implements OutputInterface
 {
     public function writeln(string $string): void
     {

@@ -1,0 +1,14 @@
+PassingAcceptedMultiline:	S         Solved in 0.000s: 
+correct-solution
+10
+PassingButNotMatchingAcceptedSolutionMultiline:	S         Solved in 0.000s: 
+correct-solution
+10 but it does not match accepted solution 
+correct-solution-10
+not-matching
+PassingNoOutputFileMultiline:	S         Solved in 0.000s: 
+passing-no-output-file
+10 but is not accepted yet
+PassingNotAcceptedMultiline:	S         Solved in 0.000s: 
+passing-not-accepted
+10 but is not accepted yet

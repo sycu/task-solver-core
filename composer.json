@@ -1,17 +1,27 @@
 {
     "name": "sycu/task-solver-core",
-    "autoload": {
-        "psr-4": {
-            "": "src/"
-        }
-    },
+    "description": "PHP Framework for competitive programming",
     "authors": [
         {
             "name": "Patryk Syc",
             "email": "patryk@edefine.pl"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FunctionalTests\\": "tests/functional/",
+            "TestEnvironment\\": "tests/environment/src/"
+        }
+    },
     "require": {
         "php": ">=8.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
     }
 }

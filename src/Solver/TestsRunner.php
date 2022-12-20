@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Solver;
 
+use Solver\Output\OutputInterface;
+
 class TestsRunner
 {
     private const PROGRESS_LENGTH = 10;
@@ -13,7 +15,7 @@ class TestsRunner
     private const TEST_OUTPUT_PATTERN = '%s/test%d.output.txt';
 
     public function __construct(
-        private readonly ConsoleOutput $output,
+        private readonly OutputInterface $output,
         private readonly TasksLocator $tasksLocator,
         private readonly string $dataDirectory
     ) {

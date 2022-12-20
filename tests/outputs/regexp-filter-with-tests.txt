@@ -1,0 +1,24 @@
+PassingAcceptedMultiline:	.         Solved in 0.000s: 
+correct-solution
+10
+PassingButNotMatchingAcceptedSolutionMultiline:	.         Solved in 0.000s: 
+correct-solution
+10 but it does not match accepted solution 
+correct-solution-10
+not-matching
+PassingNoOutputFileMultiline:	F         Solved in 0.000s: 
+passing-no-output-file
+10 but is probably wrong
+  Test case 1 failed: expected 
+correct-solution
+5 got 
+passing-no-output-file
+5
+PassingNotAcceptedMultiline:	F         Solved in 0.000s: 
+passing-not-accepted
+10 but is probably wrong
+  Test case 1 failed: expected 
+correct-solution
+5 got 
+passing-not-accepted
+5

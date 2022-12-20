@@ -1,0 +1,28 @@
+FailingTestNoSolution:	S         Solved in 0.000s: failing-test-no-solution-10 but is not accepted yet
+FailingTestNoSolutionMultiline:	S         Solved in 0.000s: 
+failing-test-no-solution
+10 but is not accepted yet
+FailingTestWithSolution:	S         Solved in 0.000s: correct-solution-10
+FailingTestWithSolutionMultiline:	S         Solved in 0.000s: 
+correct-solution
+10
+NoInputFile:	S         Missing input file
+NoInputFileMultiline:	S         Missing input file
+PassingAccepted:	S         Solved in 0.000s: correct-solution-10
+PassingAcceptedMultiline:	S         Solved in 0.000s: 
+correct-solution
+10
+PassingButNotMatchingAcceptedSolution:	S         Solved in 0.000s: correct-solution-10 but it does not match accepted solution correct-solution-10-not-matching
+PassingButNotMatchingAcceptedSolutionMultiline:	S         Solved in 0.000s: 
+correct-solution
+10 but it does not match accepted solution 
+correct-solution-10
+not-matching
+PassingNoOutputFile:	S         Solved in 0.000s: passing-no-output-file-10 but is not accepted yet
+PassingNoOutputFileMultiline:	S         Solved in 0.000s: 
+passing-no-output-file
+10 but is not accepted yet
+PassingNotAccepted:	S         Solved in 0.000s: passing-not-accepted-10 but is not accepted yet
+PassingNotAcceptedMultiline:	S         Solved in 0.000s: 
+passing-not-accepted
+10 but is not accepted yet
