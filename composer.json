@@ -1,0 +1,17 @@
+{
+    "name": "sycu/task-solver",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Patryk Syc",
+            "email": "patryk@edefine.pl"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    }
+}

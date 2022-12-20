@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tasks;
+
+use Solver\Task;
+
+class [KEY] extends Task
+{
+    protected function solve(array $lines): string
+    {
+        return (string) count($lines);
+    }
+}
