@@ -12,7 +12,7 @@ class TestsRunner
     private const TEST_INPUT_PATTERN = '%s/test%d.input.txt';
     private const TEST_OUTPUT_PATTERN = '%s/test%d.output.txt';
 
-    public function __construct(private readonly ConsoleOutput $output)
+    public function __construct(private readonly string $dataDirectory, private readonly ConsoleOutput $output)
     {
     }
 
@@ -35,8 +35,9 @@ class TestsRunner
                 continue;
             }
 
-            $output = $task->solveForInputFile(sprintf(self::TEST_INPUT_PATTERN, $task->dataDirectory(), $number));
-            $expected = rtrim(file_get_contents(sprintf(self::TEST_OUTPUT_PATTERN, $task->dataDirectory(), $number)));
+            $taskDataDirectory = $this->taskDataDirectory($task);
+            $output = $task->solveForInputFile(sprintf(self::TEST_INPUT_PATTERN, $taskDataDirectory, $number));
+            $expected = rtrim(file_get_contents(sprintf(self::TEST_OUTPUT_PATTERN, $taskDataDirectory, $number)));
 
             if ($output === $expected) {
                 $this->output->write('.');
@@ -61,14 +62,15 @@ class TestsRunner
      */
     private function printSolutionAndFailures(Task $task, array $failures): void
     {
-        if (!file_exists(sprintf(self::INPUT_PATTERN, $task->dataDirectory()))) {
+        $taskDataDirectory = $this->taskDataDirectory($task);
+        if (!file_exists(sprintf(self::INPUT_PATTERN, $taskDataDirectory))) {
             $this->output->writeln('Missing input file');
 
             return;
         }
 
         $startTime = microtime(true);
-        $solution = $task->solveForInputFile(sprintf(self::INPUT_PATTERN, $task->dataDirectory()));
+        $solution = $task->solveForInputFile(sprintf(self::INPUT_PATTERN, $taskDataDirectory));
         $solutionTime = microtime(true) - $startTime;
         $acceptedSolution = $this->acceptedSolution($task);
 
@@ -96,15 +98,22 @@ class TestsRunner
         return $output;
     }
 
+    private function taskDataDirectory(Task $task): string
+    {
+        return "{$this->dataDirectory}/{$task->key()}";
+    }
+
     private function testExists(Task $task, int $number): bool
     {
-        return file_exists(sprintf(self::TEST_INPUT_PATTERN, $task->dataDirectory(), $number))
-            && file_exists(sprintf(self::TEST_OUTPUT_PATTERN, $task->dataDirectory(), $number));
+        $taskDataDirectory = $this->taskDataDirectory($task);
+
+        return file_exists(sprintf(self::TEST_INPUT_PATTERN, $taskDataDirectory, $number))
+            && file_exists(sprintf(self::TEST_OUTPUT_PATTERN, $taskDataDirectory, $number));
     }
 
     private function acceptedSolution(Task $task): ?string
     {
-        $acceptedSolutionPath = sprintf(self::OUTPUT_PATTERN, $task->dataDirectory());
+        $acceptedSolutionPath = sprintf(self::OUTPUT_PATTERN, $this->taskDataDirectory($task));
         if (!file_exists($acceptedSolutionPath)) {
             return null;
         }

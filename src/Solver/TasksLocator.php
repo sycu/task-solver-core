@@ -6,18 +6,23 @@ namespace Solver;
 
 class TasksLocator
 {
+    public function __construct(private readonly string $namespace, private readonly string $directory)
+    {
+    }
+
     /**
      * @return Task[]
      */
     public function find(string $filter): array
     {
-        $files = scandir(dirname(__FILE__, 2) . '/Tasks');
+        $files = scandir($this->directory);
         natsort($files);
 
         $tasks = [];
         foreach ($files as $file) {
             if (preg_match("/^(.*{$filter}.*)\.php$/", $file, $matches)) {
-                $tasks[] = new ('\\Tasks\\' . $matches[1])();
+                $class = "{$this->namespace}\\{$matches[1]}";
+                $tasks[] = new $class();
             }
         }
 

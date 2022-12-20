@@ -1,10 +1,14 @@
 # Task Solver
-Solutions for Advent Of Code 2022
+PHP Framework for competitive programming
 
-## Setup
+## Installation
 ```shell
-composer install
+composer require sycu/task-solver
+cp vendor/sycu/task-solver/examples/* .
 ```
+
+## Configuration
+Modify **config.php** to your needs.
 
 ## Run tests and get solutions
 You can filter tasks by providing **[FILTER]** argument (regexp)

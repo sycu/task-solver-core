@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tasks;
+namespace [NAMESPACE];
 
 use Solver\Task;
 
@@ -10,6 +10,6 @@ class [KEY] extends Task
 {
     protected function solve(array $lines): string
     {
-        return (string) count($lines);
+        return 'not-implemented';
     }
 }
