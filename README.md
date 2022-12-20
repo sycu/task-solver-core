@@ -4,7 +4,7 @@ PHP Framework for competitive programming
 ## Installation
 ```shell
 composer require sycu/task-solver
-cp vendor/sycu/task-solver/examples/* .
+cp vendor/sycu/task-solver/resources/* .
 ```
 
 ## Configuration
