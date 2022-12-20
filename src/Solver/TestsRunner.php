@@ -12,11 +12,21 @@ class TestsRunner
     private const TEST_INPUT_PATTERN = '%s/test%d.input.txt';
     private const TEST_OUTPUT_PATTERN = '%s/test%d.output.txt';
 
-    public function __construct(private readonly string $dataDirectory, private readonly ConsoleOutput $output)
-    {
+    public function __construct(
+        private readonly ConsoleOutput $output,
+        private readonly TasksLocator $tasksLocator,
+        private readonly string $dataDirectory
+    ) {
     }
 
-    public function run(Task $task, bool $solutionOnly): void
+    public function run(string $filter, bool $solutionsOnly): void
+    {
+        foreach ($this->tasksLocator->find($filter) as $task) {
+            $this->runForTask($task, $solutionsOnly);
+        }
+    }
+
+    private function runForTask(Task $task, bool $solutionOnly): void
     {
         $failures = $this->runTestsAndGetFailures($task, $solutionOnly);
         $this->printSolutionAndFailures($task, $failures);
