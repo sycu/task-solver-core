@@ -15,7 +15,8 @@
     "autoload-dev": {
         "psr-4": {
             "FunctionalTests\\": "tests/functional/",
-            "TestEnvironment\\": "tests/environment/src/"
+            "TestEnvironment\\": "tests/functional/environment/src/",
+            "UnitTests\\": "tests/unit/"
         }
     },
     "require": {

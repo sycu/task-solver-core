@@ -16,33 +16,28 @@ use Solver\TestsRunner;
  */
 class SolvingTest extends TestCase
 {
+    private TestsRunner $testsRunner;
+
+    private BufferedOutput $output;
+
+    protected function setUp(): void
+    {
+        $testsRoot = dirname(__FILE__);
+
+        $this->output = new BufferedOutput();
+        $tasksLocator = new TasksLocator('TestEnvironment\Tasks', "{$testsRoot}/environment/src/Tasks");
+
+        $this->testsRunner = new TestsRunner($this->output, $tasksLocator, "{$testsRoot}/environment/tasks");
+    }
+
     /**
      * @dataProvider runDataProvider
      */
     public function testRunExecutesTestsAndPrintsOutput(string $filter, bool $solutionsOnly, string $expected): void
     {
-        $testsRoot = dirname(__FILE__, 2);
-        $config = require "{$testsRoot}/environment/config.php";
+        $this->testsRunner->run($filter, $solutionsOnly);
 
-        $output = new BufferedOutput();
-        $tasksLocator = new TasksLocator($config['namespace'], $config['code_directory']);
-
-        $runner = new TestsRunner($output, $tasksLocator, $config['data_directory']);
-        $runner->run($filter, $solutionsOnly);
-
-        $this->assertOutputEqualsFile("{$testsRoot}/outputs/{$expected}", $output->get());
-    }
-
-    private function assertOutputEqualsFile(string $path, string $output): void
-    {
-        if (!file_exists($path)) {
-            file_put_contents($path, $output);
-            $this->markTestIncomplete("Generated output {$path}");
-
-            return;
-        }
-
-        $this->assertSame(file_get_contents($path), $output);
+        $this->assertOutputEqualsFile($expected, $this->output->get());
     }
 
     public function runDataProvider(): array
@@ -79,5 +74,20 @@ class SolvingTest extends TestCase
                 'expected' => 'regexp-filter-no-tests.txt',
             ],
         ];
+    }
+
+    private function assertOutputEqualsFile(string $file, string $output): void
+    {
+        $testsRoot = dirname(__FILE__);
+        $path = "{$testsRoot}/resources/outputs/{$file}";
+
+        if (!file_exists($path)) {
+            file_put_contents($path, $output);
+            $this->markTestIncomplete("Generated output {$path}");
+
+            return;
+        }
+
+        $this->assertSame(file_get_contents($path), $output);
     }
 }
