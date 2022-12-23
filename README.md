@@ -7,7 +7,7 @@ This is just a core for task solver. If you want to set up your own runtime envi
 
 Generate **src/Tasks/AwesomeTask.php** class with namespace **My\Tasks** and data files in **tasks/AwesomeTask**:
 ```php
-$generator = new Solver\TaskGenerator('My\Tasks', 'src/Tasks', 'tasks');
+$generator = new Solver\Generator\TaskGenerator('My\Tasks', 'src/Tasks', 'tasks');
 
 $generator->generate('AwesomeTask');
 ```
@@ -17,7 +17,7 @@ $generator->generate('AwesomeTask');
 Run all tests for tasks located in **src/Tasks** matching **Task[3-9]** regexp. Namespace is **My\Tasks** and data files are stored in **tasks/AwesomeTask**:
 ```php
 $tasksLocator = new Solver\TasksLocator('My\Tasks', 'src/Tasks');
-$testsRunner = new Solver\TestsRunner(new Solver\Output\ConsoleOutput(), $tasksLocator, 'tasks');
+$testsRunner = new Solver\Runner\TestsRunner(new Solver\Runner\Progress\ConsoleProgress(new Solver\Output\ConsoleOutput()), $tasksLocator, 'tasks');
 
 $testsRunner->run('Task[3-9]', false);
 ```

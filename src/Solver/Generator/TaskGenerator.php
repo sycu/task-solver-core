@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Solver;
+namespace Solver\Generator;
 
 use RuntimeException;
 
@@ -17,7 +17,7 @@ class TaskGenerator
 
     public function generate(string $key): void
     {
-        $rootPath = dirname(__FILE__, 3);
+        $rootPath = dirname(__FILE__, 4);
         $templatesPath = "{$rootPath}/templates";
         $dataDestination = "{$this->dataDirectory}/{$key}";
 

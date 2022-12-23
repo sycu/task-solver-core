@@ -6,10 +6,12 @@ namespace FunctionalTests;
 
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use Solver\TaskGenerator;
+use Solver\Generator\TaskGenerator;
+use Solver\Generator\TaskGeneratorFactory;
 
 /**
- * @covers \Solver\TaskGenerator
+ * @covers \Solver\Generator\TaskGenerator
+ * @covers \Solver\Generator\TaskGeneratorFactory
  */
 class GeneratingTest extends TestCase
 {
@@ -20,11 +22,11 @@ class GeneratingTest extends TestCase
         $testsRoot = dirname(__FILE__);
         $this->removeTestFiles($testsRoot);
 
-        $this->taskGenerator = new TaskGenerator(
-            'TestEnvironment\Generated',
-            "{$testsRoot}/environment/src/Generated",
-            "{$testsRoot}/environment/tasks"
-        );
+        $this->taskGenerator = TaskGeneratorFactory::createFromConfig([
+            'namespace' => 'TestEnvironment\Generated',
+            'code_directory' => "{$testsRoot}/environment/src/Generated",
+            'data_directory' => "{$testsRoot}/environment/tasks",
+        ]);
     }
 
     protected function tearDown(): void

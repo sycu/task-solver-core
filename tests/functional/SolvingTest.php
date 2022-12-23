@@ -6,13 +6,15 @@ namespace FunctionalTests;
 
 use PHPUnit\Framework\TestCase;
 use Solver\Output\BufferedOutput;
-use Solver\TasksLocator;
-use Solver\TestsRunner;
+use Solver\Runner\TestsRunner;
+use Solver\Runner\TestsRunnerFactory;
 
 /**
+ * @covers \Solver\Runner\Progress\ConsoleProgress
  * @covers \Solver\Task
  * @covers \Solver\TasksLocator
- * @covers \Solver\TestsRunner
+ * @covers \Solver\Runner\TestsRunner
+ * @covers \Solver\Runner\TestsRunnerFactory
  */
 class SolvingTest extends TestCase
 {
@@ -25,9 +27,12 @@ class SolvingTest extends TestCase
         $testsRoot = dirname(__FILE__);
 
         $this->output = new BufferedOutput();
-        $tasksLocator = new TasksLocator('TestEnvironment\Tasks', "{$testsRoot}/environment/src/Tasks");
 
-        $this->testsRunner = new TestsRunner($this->output, $tasksLocator, "{$testsRoot}/environment/tasks");
+        $this->testsRunner = TestsRunnerFactory::createFromConfig([
+            'namespace' => 'TestEnvironment\Tasks',
+            'code_directory' => "{$testsRoot}/environment/src/Tasks",
+            'data_directory' => "{$testsRoot}/environment/tasks",
+        ], ['output' => $this->output]);
     }
 
     /**
