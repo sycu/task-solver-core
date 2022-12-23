@@ -23,6 +23,9 @@ class ConsoleProgress implements ProgressInterface
 
     public function taskStarted(Task $task): void
     {
+        $this->tests[$task->key()] = [];
+        $this->failures[$task->key()] = [];
+
         $this->output->write("{$task->key()}:\t");
     }
 
@@ -36,7 +39,7 @@ class ConsoleProgress implements ProgressInterface
         $time = $this->solvingEndTimes[$task->key()] - $this->solvingStartTimes[$task->key()];
 
         $this->output->write(sprintf('Solved in %.3fs: %s', $time, $this->formatOutput($solution)));
-        if ($this->failures[$task->key()] ?? false) {
+        if ($this->failures[$task->key()]) {
             $this->output->write(' but is probably wrong');
         } elseif (!$acceptedSolution) {
             $this->output->write(' but is not accepted yet');
@@ -45,7 +48,7 @@ class ConsoleProgress implements ProgressInterface
         }
 
         $this->output->writeln('');
-        foreach ($this->failures[$task->key()] ?? [] as $failure) {
+        foreach ($this->failures[$task->key()] as $failure) {
             $this->output->writeln("  {$failure}");
         }
     }
