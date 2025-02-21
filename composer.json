@@ -1,12 +1,6 @@
 {
     "name": "sycu/task-solver-core",
     "description": "PHP Framework for competitive programming",
-    "authors": [
-        {
-            "name": "Patryk Syc",
-            "email": "patryk@edefine.pl"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "": "src/"
